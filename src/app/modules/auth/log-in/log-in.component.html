@@ -1,1 +1,13 @@
-<p>log-in works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="logIn()" *ngIf="loginForm">
+  <div class="mb-3">
+    <label for="username">username</label>
+    <input type="email" name="username" formControlName="username" id="username">
+  </div>
+  <div class="mb-3">
+    <label for="password">username</label>
+    <input type="password" name="password" id="password" formControlName="password">
+  </div>
+  <div class="d-grid gap-2">
+  <button class="btn btn-primary btn-sm">Log in</button>
+  </div>
+</form>
