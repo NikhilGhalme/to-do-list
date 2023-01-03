@@ -12,11 +12,14 @@ export class AuthService {
   // baseAuthUrl = environment.AUTH_URL;
   constructor(private http:HttpClient) { }
 
-  login(param:object):Observable<any> {
-    return this.http.post(this.baseUrl + '/login',param);
-  }
   signUp(param:object):Observable<any> {
     return this.http.post(this.baseUrl + '/register',param);
+  }
+  updateUser(param:object):Observable<any> {
+    return this.http.put(this.baseUrl + '/register/', param);
+  }
+  login(param:object):Observable<any> {
+    return this.http.post(this.baseUrl + '/login',param);
   }
 
   user(){

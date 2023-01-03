@@ -14,7 +14,8 @@ import { LayoutComponent } from './layout.component';
     LayoutComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
