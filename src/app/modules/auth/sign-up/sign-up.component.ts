@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { User } from "../../../shared/models/user";
@@ -11,7 +11,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 })
 export class SignUpComponent implements OnInit {
   user: User;
-  userId: number;
+  @Input() userId: number;
   form: UntypedFormGroup;
 
   constructor(private signUpService: AuthService, private router: Router) {

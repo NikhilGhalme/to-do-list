@@ -11,9 +11,16 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class UserProfileComponent implements OnInit {
   form: UntypedFormGroup;
   user: User;
+  userAlreadyExists: any;
+  userId: number;
   constructor(private authService: AuthService) {
     this.authService.user().subscribe(response => {
       console.log(response);
+      this.userAlreadyExists = response;
+      this.userId = this.userAlreadyExists?.id;
+      console.log(this.userAlreadyExists);
+      console.log(this.userId);
+
     })
   }
 
