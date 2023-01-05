@@ -11,9 +11,12 @@ export class HeaderComponent implements OnInit {
 
   user: any;
   constructor(private authService: AuthService) {
-    this.authService.user().subscribe(response => {
-      this.user = response;
-    });
+    const token = localStorage.getItem('token');
+    if(token) {
+      this.authService.user().subscribe(response => {
+        this.user = response;
+      });
+    }
   }
 
   ngOnInit(): void {
