@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { User } from "../../../shared/models/user";
@@ -10,30 +10,41 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   styleUrls: ["./sign-up.component.scss"]
 })
 export class SignUpComponent implements OnInit {
-  user: User;
-  @Input() userId: number;
+  user: any;
+  @Output() userProfile: EventEmitter<any> = new EventEmitter();
+  userId: number;
   form: UntypedFormGroup;
 
-  constructor(private signUpService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
   ngOnInit(): void {
-    this.user = new User({});
-    this.form = User.getForm(this.user);
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.authService.user().subscribe(response => {
+        this.user = response;
+        this.user = new User(this.user);
+        this.userId = this.user?.id;
+        this.form = User.getForm(this.user);
+        this.userProfile.emit(this.user);
+      })
+    }else {
+      this.user = new User({});
+      this.form = User.getForm(this.user);
+    }
   }
 
   signUp() {
-    console.log(this.form.value);
     if (this.form.value["password"] !== this.form.value["confirm_password"]) {
       alert("password not equal to confirmPassword");
     } else {
       if (this.form.valid) {
-        this.signUpService.signUp(this.form.value).subscribe(response => {
+        this.authService.signUp(this.form.value).subscribe(response => {
           console.log(response);
           // this.user = new User(response);
           this.userId = response.id;
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(["/auth/login"]);
           alert("Register successfully!");
         });
         this.form.reset();
