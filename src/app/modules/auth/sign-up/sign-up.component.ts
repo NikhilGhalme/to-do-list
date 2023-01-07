@@ -12,7 +12,6 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 })
 export class SignUpComponent implements OnInit {
   user: any;
-  @Output() userProfile: EventEmitter<any> = new EventEmitter();
   userId: number;
   form: UntypedFormGroup;
 
@@ -28,7 +27,6 @@ export class SignUpComponent implements OnInit {
         this.user = new User(this.user);
         this.userId = this.user?.id;
         this.form = User.getForm(this.user);
-        this.userProfile.emit(this.user);
       })
     }else {
       this.user = new User({});

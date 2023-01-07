@@ -11,14 +11,19 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 })
 export class UserProfileComponent extends BaseComponent implements OnInit {
   form: UntypedFormGroup;
-  @Input() user: any;
+ user: any;
   userId: number;
-  constructor(injector:Injector, ) {
+  userDetail:any;
+  constructor(injector:Injector, private authService:AuthService ) {
     super(injector);
   }
 
   ngOnInit(): void {
-
+    if(this.token){
+      this.authService.user().subscribe(res =>{
+        this.user = res;
+      })
+    }
   }
 
 }
