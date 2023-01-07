@@ -14,7 +14,7 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
-      <a class="profile d-flex text-decoration-none" *ngIf="user">
+      <a class="profile d-flex text-decoration-none" *ngIf="user" routerLink="dashboard/user">
         <img src="assets/images/profile.png" alt="logo" class="rounded-circle" width="40" height="38">
         <h4 class="pt-1 me-4 ms-2">{{user?.first_name}}</h4>
       </a>
