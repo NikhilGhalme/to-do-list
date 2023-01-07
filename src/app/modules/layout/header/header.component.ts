@@ -28,7 +28,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     Notiflix.Report.failure("Log Out!","Are you sure you want to log out", "Log out",()=> {
      localStorage.removeItem('token');
      this.router.navigate(['auth/login']);
-    });
+    }, {backOverlayClickToClose:true});
 
   }
 
