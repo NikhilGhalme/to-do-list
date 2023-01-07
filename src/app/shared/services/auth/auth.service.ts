@@ -16,7 +16,7 @@ export class AuthService {
     return this.http.post(this.baseUrl + '/register',param);
   }
   updateUser(param:object):Observable<any> {
-    return this.http.put(this.baseUrl + '/register/', param);
+    return this.http.put(this.baseUrl + '/updateProfile/', param);
   }
   login(param:object):Observable<any> {
     return this.http.post(this.baseUrl + '/login',param);

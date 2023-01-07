@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Injector, Input, OnInit } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
-import { User } from 'src/app/shared/models/user';
+import { Router } from "@angular/router";
+import { BaseComponent } from "../../../shared/base-component.component";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 
 @Component({
@@ -8,11 +9,12 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent extends BaseComponent implements OnInit {
   form: UntypedFormGroup;
   @Input() user: any;
   userId: number;
-  constructor(private authService: AuthService) {
+  constructor(injector:Injector, ) {
+    super(injector);
   }
 
   ngOnInit(): void {
