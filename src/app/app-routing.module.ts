@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: "dashboard",
     loadChildren: () => import("./modules/layout/layout.module").then(m => m.LayoutModule),
-    title: "To Do List Authentication",
+    title: "ToDoList | Profile",
+  },
+  {
+    path: "task",
+    loadChildren: () => import("./modules/task/task.module").then(m => m.TaskModule),
+    title: "ToDoList | Task Management",
   },
   {
     path: "",
