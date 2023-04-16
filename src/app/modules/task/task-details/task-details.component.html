@@ -1,27 +1,38 @@
 <div class="card">
-  <div class="row vh-100">
-    <div class="col-sm-2 col-md-2 col-lg-2 border-end">
-      <h4 class="ms-3">Create Workspaces</h4>
-      <form class="d-flex align-items-center m-3" (ngSubmit)="addWorkspace()" [formGroup]="form" *ngIf="form">
-        <input type="text" formControlName="workspace" id="workspace1" class="form-control">
-        <button class="btn btn-sm btn-info ms-2" type="submit">Add Workspace</button>
-        <!--        <div *ngFor="let input of inputs; let i = index">-->
-        <!--          <input type="text" name="input{{i}}" [(ngModel)]="input.value" >-->
-        <!--        </div>-->
-      </form>
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-2 border-end">
+			<h4 class="ms-3">Create Workspaces</h4>
+			<form class="d-flex align-items-center m-2" (ngSubmit)="addWorkspace()" [formGroup]="form" *ngIf="form">
+				<input type="text" formControlName="workspace" id="workspace1" class="form-control">
+				<button class="btn  btn-info ms-2" type="submit">Add</button>
+			</form>
 
-      <div *ngIf="workspaces">
-        <div *ngFor="let workspace of workspaces">
-          <div class=" mb-3 d-flex">
-            <input type="text" class="form-control" placeholder="Recipient's username" [value]="workspace.workspace"
-                   [disabled]="workspace.id !== isWorkspaceId" aria-placeholder="Workspace name">
-            <button class="btn btn-outline-secondary" (click)="edit(workspace.id )" type="button" id="button-edit"></button>
-            <button *ngIf="workspace.id === isWorkspaceId"  (click)="save()" type="button" id="button-update"></button>
-            <button *ngIf="workspace.id !== isWorkspaceId"  (click)="save()" type="button" id="button-delete"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+			<div *ngIf="workspaces">
+				<div *ngFor="let workspace of workspaces">
+					<div class=" mb-3 d-flex"  >
+						<span (click)="selectWorkspace(workspace)">
+							<input type="text" #updateWorkspace class="form-control ms-2" placeholder="Recipient's username"
+								   [value]="workspace.workspace"
+								   [disabled]="workspace.id !== isWorkspaceId" aria-placeholder="Workspace name"
+								   id="{{workspace.id}}">
+						</span>
+						<button class="btn" (click)="edit(workspace.id )" id="button-edit">
+							<i class="fa-regular fa-pen-to-square" style="color: #a55cc7;"></i>
+						</button>
+						<button *ngIf="workspace.id === isWorkspaceId" class="btn" (click)="save(updateWorkspace)"
+								id="button-update">
+							<i class="fa-regular fa-circle-check" style="color: #a55cc7;"></i>
+						</button>
+						<button *ngIf="workspace.id !== isWorkspaceId" class="btn" (click)="delete(updateWorkspace)"
+								id="button-delete"><i class="fa-regular fa-trash-can" style="color: #a55cc7;"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-10 col-md-10 col-lg-10">
+			<app-task-cards [id]="workspaceId" *ngIf="workspaceId"></app-task-cards>
+		</div>
+	</div>
 </div>
 
