@@ -1,8 +1,6 @@
 import { Component, Injector, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import * as Notiflix from "notiflix";
 import { BaseComponent } from "../../../shared/base-component.component";
-import { User } from "../../../shared/interfaces/user";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 
 @Component({
@@ -13,7 +11,7 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
 export class HeaderComponent extends BaseComponent implements OnInit {
 
   user: any;
-  constructor(private injector:Injector,private authService: AuthService,private router:Router) {
+  constructor(private injector:Injector,private authService: AuthService) {
     super(injector);
     if(this.token) {
       this.authService.user().subscribe(response => {

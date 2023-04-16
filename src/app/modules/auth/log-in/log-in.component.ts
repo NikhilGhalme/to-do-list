@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Injector, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import * as Notiflix from "notiflix";
+import { BaseComponent } from "../../../shared/base-component.component";
 import { AuthService } from "../../../shared/services/auth/auth.service";
-import { Router } from "@angular/router";
 import { User } from "src/app/shared/models/user";
 
 @Component({
@@ -10,10 +9,11 @@ import { User } from "src/app/shared/models/user";
   templateUrl: "./log-in.component.html",
   styleUrls: ["./log-in.component.scss"]
 })
-export class LogInComponent implements OnInit {
+export class LogInComponent extends BaseComponent implements OnInit {
 
   user: User;
-  constructor(private router: Router,private loginService: AuthService) {
+  constructor(injector: Injector, private loginService: AuthService) {
+      super(injector);
   }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class LogInComponent implements OnInit {
     if(this.loginForm.valid){
         this.loginService.login(this.loginForm.value).subscribe(response => {
           localStorage.setItem("token", response.token);
-          Notiflix.Report.success("Login successfully!",'good to go', 'Profile' ,()=>{
+          this.notify.Report.success("Login successfully!",'good to go', 'Profile' ,()=>{
             this.router.navigate(['dashboard/user']);
             console.log(response);
           });
