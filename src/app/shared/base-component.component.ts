@@ -7,6 +7,7 @@ export abstract class BaseComponent {
    notify:any;
    router:Router;
   protected constructor(injector: Injector) {
+      this.router = injector.get(Router);
   this.token = localStorage.getItem('token');
   this.notify = Notiflix;
   }
