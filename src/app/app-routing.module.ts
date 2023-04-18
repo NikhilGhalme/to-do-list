@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./shared/guards/auth.guard";
 
 const routes: Routes = [
 	{
@@ -15,6 +16,7 @@ const routes: Routes = [
 	{
 		path: "task",
 		loadChildren: () => import("./modules/task/task.module").then(m => m.TaskModule),
+		canActivate: [AuthGuard],
 		title: "ToDoList | Workspace Management",
 	},
 	{

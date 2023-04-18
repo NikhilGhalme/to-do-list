@@ -12,6 +12,10 @@ export class AuthService {
   // baseAuthUrl = environment.AUTH_URL;
   constructor(private http:HttpClient) { }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem("token") !== null;
+  }
+
   signUp(param:object):Observable<any> {
     return this.http.post(this.baseUrl + '/register',param);
   }
