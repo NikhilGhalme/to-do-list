@@ -1,18 +1,22 @@
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 
 
-export class Workspace {
-  id: number
-  task: string
+export class Card {
+	id: number;
+	heading: string;
+	body: string;
+	workspace_id: number;
 
+	constructor(paramsObject: Object) {
+		Object.assign(this, paramsObject);
+	}
 
-  constructor(paramsObject: Object){
-    Object.assign(this, paramsObject);
-  }
-
-static getForm(workspace: Workspace):UntypedFormGroup{
-    return new UntypedFormBuilder().group({
-      id: [workspace.id],
-      workspace: [workspace.task, Validators.required],
-    })}
+	static getForm(card: Card): UntypedFormGroup {
+		return new UntypedFormBuilder().group({
+			id: [card.id],
+			workspace_id: [card.workspace_id, Validators.required],
+			heading: [card.heading],
+			body: [card.body, Validators.required],
+		});
+	}
 }
