@@ -30,6 +30,7 @@ export class LogInComponent extends BaseComponent implements OnInit {
           localStorage.setItem("token", response.token);
           this.notify.Report.success("Login successfully!",'good to go', 'Profile' ,()=>{
             this.router.navigate(['dashboard/user']);
+            window.location.reload();
             console.log(response);
           });
         })
