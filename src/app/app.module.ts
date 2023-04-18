@@ -8,6 +8,7 @@ import { LayoutModule } from "./modules/layout/layout.module";
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthService } from './shared/services/auth/auth.service';
+import { WorkspaceService } from "./shared/services/workspace.service";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthService } from './shared/services/auth/auth.service';
   ],
   providers: [
     AuthService ,
+    WorkspaceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
