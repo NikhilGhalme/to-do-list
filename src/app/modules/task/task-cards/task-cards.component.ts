@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Injector, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { UntypedFormGroup, Validators } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { CardService } from "src/app/shared/services/card.service";
 import { BaseComponent } from "../../../shared/base-component.component";
 import { Card } from "../../../shared/models/card";
@@ -16,6 +16,7 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 	oldId:number;
 	workspace: any;
 	isEditmode = false;
+	isAddNewCard = false;
 	form: UntypedFormGroup;
 	currentCardId:number;
 	cards: any = [];
@@ -35,7 +36,11 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 		if (this.form.valid) {
 			this.cardService.addCard(this.form.value).subscribe(res => {
 				console.log(res, "Added card");
+				this.cards.unshift(res);
+				console.log(this.cards, "6776666666666666")
 				this.notify.Notify.success("Card added successfully!");
+				this.isAddNewCard = false;
+				this.form.reset();
 			}, (err: HttpErrorResponse) => {
 				console.log(err);
 			});
@@ -53,6 +58,7 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 		this.cardService.getWorkspaceCards(this.id).subscribe(res => {
 			console.log(res);
 			this.cards = res;
+			this.cards.reverse()
 			console.log(this.cards);
 		});
 	}
@@ -65,9 +71,34 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 		this.form.reset();
 	}
 
-	edit(id: number) {
+	edit(card: Card) {
 		this.isEditmode = true;
-		this.currentCardId = id;
+		this.form = Card.getForm(card);
+		this.currentCardId = card.id;
+	}
+	updateCard(card: Card) {
+		this.cardService.updateCard(card).subscribe(
+			(result) => {
+				console.log(result);
+				this.notify.Notify.success("Card updated successfully");
+			}
+		)
+	}
+	deleteCard(id: number) {
+		this.cardService.deleteCard(id).subscribe( response => {
+			const index = this.cards.findIndex((obj: Card) => obj.id === id);
+			this.cards.splice(index, 1);
+			this.notify.Notify.success("Card deleted successfully");
 
+			},
+		(error: HttpErrorResponse) => {
+			console.log(error);
+			this.notify.Notify.failure(error.message);
+		}
+		)
+		console.log("delete", id);
+	}
+	isVisibleNewForm(){
+		this.isAddNewCard = true;
 	}
 }
