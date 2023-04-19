@@ -11,15 +11,18 @@ export class CardService {
   constructor(private http:HttpClient) {}
 
   addCard(param:Card) {
-    return this.http.post(this.baseUrl + '/addCard', param);
+    return this.http.post(this.baseUrl + '/cards', param);
+  }
+  updateCard(param:Card) {
+    return this.http.put(this.baseUrl + `/cards/${param.id}`, param);
   }
   getCards() {
-    return this.http.get(this.baseUrl + '/getCards');
+    return this.http.get(this.baseUrl + '/cards');
   }
   deleteCard(id:number) {
-    return this.http.delete(this.baseUrl + `/getCards/${id}`);
+    return this.http.delete(this.baseUrl + `/cards/${id}`);
   }
   getWorkspaceCards(id:number) {
-    return this.http.get(this.baseUrl + `/getCards/${id}`);
+    return this.http.get(this.baseUrl + `/cards/${id}`);
   }
 }
