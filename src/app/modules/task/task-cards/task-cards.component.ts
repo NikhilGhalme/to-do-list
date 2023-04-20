@@ -68,7 +68,8 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 	}
 
 	cancel() {
-		this.form.reset();
+		this.isEditmode = false;
+		this.isAddNewCard = false;
 	}
 
 	edit(card: Card) {
@@ -76,10 +77,13 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 		this.form = Card.getForm(card);
 		this.currentCardId = card.id;
 	}
-	updateCard(card: Card) {
-		this.cardService.updateCard(card).subscribe(
+	updateCard(id: number) {
+		this.cardService.updateCard(this.form.value).subscribe(
 			(result) => {
-				console.log(result);
+				const index = this.cards.findIndex((obj:Card) => obj.id === id)
+				this.cards[index] = result.data;
+				this.isEditmode = false;
+				this.form.reset();
 				this.notify.Notify.success("Card updated successfully");
 			}
 		)
