@@ -26,7 +26,6 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 	}
 
 	ngOnInit(): void {
-		this.getWorkspaceCards();
 		this.form = Card.getForm(new Card({}));
 		this.oldId = this.id;
 	}
@@ -35,9 +34,7 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 		this.form.patchValue({workspace_id: this.id});
 		if (this.form.valid) {
 			this.cardService.addCard(this.form.value).subscribe(res => {
-				console.log(res, "Added card");
 				this.cards.unshift(res);
-				console.log(this.cards, "6776666666666666")
 				this.notify.Notify.success("Card added successfully!");
 				this.isAddNewCard = false;
 				this.form.reset();
@@ -49,17 +46,17 @@ export class TaskCardsComponent extends BaseComponent implements OnInit, OnChang
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if(this.oldId !== this.id) {
-
+		if(changes["id"].currentValue && changes["id"].previousValue) {
+			this.getWorkspaceCards();
+		}else {
+		this.getWorkspaceCards();
 		}
 	}
 
 	getWorkspaceCards() {
 		this.cardService.getWorkspaceCards(this.id).subscribe(res => {
-			console.log(res);
 			this.cards = res;
 			this.cards.reverse()
-			console.log(this.cards);
 		});
 	}
 

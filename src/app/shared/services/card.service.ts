@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
+import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { Card } from "../models/card";
 
@@ -13,7 +14,7 @@ export class CardService {
   addCard(param:Card) {
     return this.http.post(this.baseUrl + '/cards', param);
   }
-  updateCard(param:Card) {
+  updateCard(param:Card):Observable<any> {
     return this.http.put(this.baseUrl + `/cards/${param.id}`, param);
   }
   getCards() {
