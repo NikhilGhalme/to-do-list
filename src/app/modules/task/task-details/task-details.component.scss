@@ -1,3 +1,11 @@
 .card .row{
   height : 89vh;
   }
+.hoverWorkspace:hover {
+  background-color: #c8ddff;
+  border: 2px solid #0c61e9;
+  }
+.selectedWorkspace {
+  background-color: #c8ddff;
+  border: 2px solid #0c61e9;
+  }

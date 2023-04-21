@@ -10,10 +10,10 @@
 			<div *ngIf="workspaces">
 				<div *ngFor="let workspace of workspaces">
 					<div class=" mb-3 d-flex"  >
-						<div (click)="selectWorkspace(workspace)" class="w-100">
-							<input type="text" #updateWorkspace class="form-control ms-2" placeholder="Recipient's username"
+						<div (click)="selectWorkspace(workspace)" class="w-100 ">
+							<input type="text" #updateWorkspace class="form-control ms-2 hoverWorkspace" placeholder="Recipient's username"
 								   [value]="workspace.workspace"
-								   [disabled]="workspace.id !== isWorkspaceId" aria-placeholder="Workspace name"
+								   [disabled]="workspace.id !== isWorkspaceId" [ngClass]="isSelected(workspace.id)? 'selectedWorkspace' :  'class'"  aria-placeholder="Workspace name"
 								   id="{{workspace.id}}">
 						</div>
 						<button class="btn" (click)="edit(workspace.id )" id="button-edit">

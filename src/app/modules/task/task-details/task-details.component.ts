@@ -26,6 +26,11 @@ export class TaskDetailsComponent extends BaseComponent implements OnInit {
 		this.getWorkspaces();
 	}
 
+	isSelected(id : number):boolean{
+		return id === this.workspaceId;
+
+	}
+
 	inputs: InputType[] = [];
 
 	addWorkspace() {
