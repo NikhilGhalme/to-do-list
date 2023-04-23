@@ -1,10 +1,9 @@
 <!--{{id}}-->
 <div class="row ">
 	<div class="col-12 d-flex justify-content-between m-2">
-		<button class="btn btn-outline-primary" (click)="isVisibleNewForm()"><i class="fa-regular fa-square-plus"></i></button>
+		<button class="btn btn-outline-primary" (click)="isVisibleNewForm()"><i class="fa-regular fa-square-plus me-2"></i>Create Task</button>
 		<div class="d-flex me-3">
-			<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search">
-			<span><button class="btn btn btn-success mx-2">Search</button> </span>
+			<input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="searchTerm" placeholder="search cards" (keyup)="searchCard(searchTerm)">
 		</div>
 	</div>
 	<div class="col-sm-3 col-md-3 col-lg-3 my-3" *ngIf="isAddNewCard">
@@ -26,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-sm-3 col-md-3 col-lg-3 my-3" *ngFor="let card of cards; trackBy : trackById ">
-		<div class="card p-3 bg-light">
+		<div class="card p-3 bg-light" [ngClass]="isSelected(card.id) ? 'selectedCard' :  'class'">
 			<ng-template [ngIf]="isEditmode && card.id === currentCardId" [ngIfElse]="ViewCard">
 				<form [formGroup]="form" (ngSubmit)="updateCard(card.id)" *ngIf="form ">
 					<div class="form-group">

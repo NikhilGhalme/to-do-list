@@ -1,25 +1,54 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <app-sidebar></app-sidebar>
-    <div class="collapse navbar-collapse" id="navbar-list">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="task/details">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-      </ul>
-      <form class="d-flex me-5">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <a class="profile d-flex text-decoration-none" *ngIf="user" routerLink="dashboard/user">
-        <img src="assets/images/profile.png" alt="logo" class="rounded-circle" width="40" height="38">
-        <h4 class="pt-1 me-4 ms-2">{{user?.first_name}}</h4>
-      </a>
-      <button *ngIf="user" (click)="logOut()" type="reset" class="btn btn-danger btn-sm">Log out</button>
-    </div>
-  </div>
+	<div class="container-fluid">
+		<app-sidebar></app-sidebar>
+		<div class="collapse navbar-collapse" id="navbar-list">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" routerLink="task/details">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+			</ul>
+			<div>
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (click)="focusGlobalSearchInput()"
+					   data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			</div>
+			<a class="profile d-flex text-decoration-none" *ngIf="user" routerLink="dashboard/user">
+				<img src="assets/images/profile.png" alt="logo" class="rounded-circle" width="40" height="38">
+				<h4 class="pt-1 me-4 ms-2">{{user?.first_name}}</h4>
+			</a>
+			<button *ngIf="user" (click)="logOut()" type="reset" class="btn btn-danger btn-sm">Log out</button>
+		</div>
+	</div>
 </nav>
 
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" #myModal
+	 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">Global Search</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body global-search" id="global-search">
+				<input class="form-control me-2 global-search" type="search" placeholder="Search" [(ngModel)]="searchTerm"
+					   (keyup)="search()">
+				<div class="" *ngFor="let item of items">
+					<div class="list-group" >
+                      <span *ngIf="item.workspaces.length">Workspaces</span>
+						<a  class="list-group-item list-group-item-action list-group-item-danger" (click)="selectByGlobalSearch(workspace)" *ngFor="let workspace of item.workspaces">{{workspace.workspace}}</a>
+						<span *ngIf="item.cards.length">card</span>
+						<a  class="list-group-item list-group-item-action list-group-item-danger" (click)="selectByGlobalSearch(card)"  *ngFor="let card of item.cards">{{card.heading}}</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Understood</button>
+			</div>
+		</div>
+	</div>
+</div>

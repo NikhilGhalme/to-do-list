@@ -2,7 +2,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Injector, OnInit } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
 import { BaseComponent } from "../../../shared/base-component.component";
+import { GlobalSearchSelectType } from "../../../shared/interfaces/globalSearchSelectType";
 import { Workspace } from "../../../shared/models/workspace";
+import { GlobalSearchService } from "../../../shared/services/global-search.service";
 import { WorkspaceService } from "../../../shared/services/workspace.service";
 
 @Component({
@@ -16,19 +18,38 @@ export class TaskDetailsComponent extends BaseComponent implements OnInit {
 	workspaces: any[] = [];
 	isWorkspaceId: number;
 	workspaceId: number;
+	workspaceIdByGlobalSearch: number;
+	selectedWorkspaceGlobalSearch: GlobalSearchSelectType | null ;
 
-	constructor(injector: Injector, private service: WorkspaceService) {
+	constructor(injector: Injector, private service: WorkspaceService, private  globalSearchService: GlobalSearchService) {
 		super(injector);
 	}
 
 	ngOnInit(): void {
 		this.form = Workspace.getForm(new Workspace({}));
 		this.getWorkspaces();
+
+		this.highlightWorkspaceByGlobalSearch();
 	}
 
-	isSelected(id : number):boolean{
-		return id === this.workspaceId;
 
+	highlightWorkspaceByGlobalSearch(){
+		this.globalSearchService.getSelectedCard().subscribe((workspace) => {
+			console.log(workspace);
+			this.selectedWorkspaceGlobalSearch = workspace;
+			if(this.selectedWorkspaceGlobalSearch !== null){
+				for (const workspace of this.workspaces) {
+					if(workspace.id === this.selectedWorkspaceGlobalSearch.id || workspace.id === this.selectedWorkspaceGlobalSearch.workspace_id){
+						this.workspaceId = this.selectedWorkspaceGlobalSearch.id;
+						this.workspaceId = this.selectedWorkspaceGlobalSearch.workspace_id;
+						this.workspaceIdByGlobalSearch = this.selectedWorkspaceGlobalSearch.workspace_id;
+					}
+				}
+			}
+		})
+	}
+	isSelected(id : number):boolean{
+		return id === this.workspaceId || id === this.workspaceIdByGlobalSearch;
 	}
 
 	inputs: InputType[] = [];
@@ -102,6 +123,7 @@ export class TaskDetailsComponent extends BaseComponent implements OnInit {
 
 	selectWorkspace(workspace:any){
 		this.workspaceId = workspace.id;
+		this.workspaceIdByGlobalSearch  = 0;
 	}
 }
 
