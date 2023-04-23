@@ -26,4 +26,9 @@ export class CardService {
   getWorkspaceCards(id:number) {
     return this.http.get(this.baseUrl + `/cards/${id}`);
   }
+
+  searchCards(param:Object):any {
+    return this.http.post(this.baseUrl + '/searchCards', param);
+  }
+
 }
