@@ -5,7 +5,6 @@ import {
   HttpEvent,
   HttpInterceptor, HttpErrorResponse
 } from "@angular/common/http";
-import * as Notiflix from "notiflix";
 import { Notify } from "notiflix";
 import { Observable, tap } from "rxjs";
 

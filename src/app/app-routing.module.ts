@@ -11,6 +11,7 @@ const routes: Routes = [
 	{
 		path: "dashboard",
 		loadChildren: () => import("./modules/layout/layout.module").then(m => m.LayoutModule),
+		canActivate: [AuthGuard],
 		title: "ToDoList | Profile",
 	},
 	{

@@ -29,10 +29,11 @@ export class LogInComponent extends BaseComponent implements OnInit {
         this.loginService.login(this.loginForm.value).subscribe(response => {
           localStorage.setItem("token", response.token);
           this.notify.Report.success("Login successfully!",'good to go', 'Profile' ,()=>{
-            this.router.navigate(['dashboard/user']);
             window.location.reload();
             console.log(response);
           });
+          this.router.navigate(['/dashboard/user']);
+
         })
     }
   }
