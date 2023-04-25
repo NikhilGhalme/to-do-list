@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Injector, OnInit, Output, ViewChild } from "@angular/core";
+import { ActivatedRoute, NavigationEnd } from "@angular/router";
 import * as Notiflix from "notiflix";
 import { BaseComponent } from "../../../shared/base-component.component";
 import { Workspace } from "../../../shared/models/workspace";
@@ -37,7 +38,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 	}
 
 	search() {
-		if(this.searchTerm.length > 1) {
+		if(this.searchTerm?.length > 1) {
 		this.globalSearchService.search({searchText: this.searchTerm}).subscribe((data: any) => {
 			console.log(data);
 			this.items.length = 0;
@@ -57,7 +58,14 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 	}
 
 	selectByGlobalSearch(workspace: Workspace) {
-      this.globalSearchService.setSelectedCard(workspace);
+		this.router.navigate(["task/details"]);
+		// this.router.events.subscribe(event => {
+		// 	if (event instanceof NavigationEnd && event.url === '/task/details') {
+				setTimeout(() => {
+				this.globalSearchService.setSelectedCard(workspace);
+				},	1000);
+		// 	}
+		// });
 		const modalElement = this.myModal.nativeElement;
 		modalElement.classList.remove('show');
 		modalElement.style.display = 'none';

@@ -6,16 +6,13 @@
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" routerLink="task/details">Home</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
 			</ul>
 			<div>
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (click)="focusGlobalSearchInput()"
+				<input class="form-control me-2" type="search" placeholder="Global search" aria-label="Search" (click)="focusGlobalSearchInput()"
 					   data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			</div>
 			<a class="profile d-flex text-decoration-none" *ngIf="user" routerLink="dashboard/user">
-				<img src="assets/images/profile.png" alt="logo" class="rounded-circle" width="40" height="38">
+				<img src="assets/images/vishwaProfile.jpeg" alt="logo" class="rounded-circle" width="40" height="38">
 				<h4 class="pt-1 me-4 ms-2">{{user?.first_name}}</h4>
 			</a>
 			<button *ngIf="user" (click)="logOut()" type="reset" class="btn btn-danger btn-sm">Log out</button>
@@ -34,8 +31,8 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body global-search" id="global-search">
-				<input class="form-control me-2 global-search" type="search" placeholder="Search" [(ngModel)]="searchTerm"
-					   (keyup)="search()">
+				<input class="form-control me-2 global-search" type="search" placeholder="Global search" [(ngModel)]="searchTerm"
+					   (keydown)="search()">
 				<div class="" *ngFor="let item of items">
 					<div class="list-group" >
                       <span *ngIf="item.workspaces.length">Workspaces</span>
