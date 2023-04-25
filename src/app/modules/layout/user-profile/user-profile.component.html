@@ -1,31 +1,48 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Profile Information</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <app-sign-up></app-sign-up>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Profile Information</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<app-sign-up></app-sign-up>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="container-fluid w-50 h-100 d-flex align-items-center justify-content-center">
-  <div class="card d-flex shadow flex-row justify-content-center align-items-center ">
-    <button type="button" class="btn btn-primary position m-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit Profile</button>
-    <img src="assets/images/profile.png" alt="preview" class="h-50 w-50">
-    <div class="d-flex flex-column">
-      <h5 class="me-3">First Name:- <span>{{user?.first_name}}</span></h5>
-      <h5 class="me-3">Last Name:- <span>{{user?.last_name}}</span></h5>
-      <h5 class="me-3">Used for:- <span>{{user?.used_for}}</span></h5>
-      <h5>Email:- <a class="me-3">{{user?.email}}</a></h5>
-    </div>
-  </div>
+<!--<div class="container-fluid w-50 h-100 d-flex align-items-center justify-content-center">-->
+<!--  <div class="card d-flex shadow  justify-content-center align-items-center flex-column">-->
+<!--    <div class="d-">-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <button type="button" class="btn btn-primary position m-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit Profile</button>&ndash;&gt;-->
+<!--    <div class="">-->
+<!--    </div>-->
+<!--  </div>-->
 
+<!--</div>-->
+<div class="d-flex align-items-center justify-content-center" style="height: 91vh">
+<div class="card w-50 ">
+	<button type="button" class="btn btn-primary position m-4" data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit Profile</button>
+	<div class="d-flex justify-content-center">
+      <img src="assets/images/FigmaProfile.png" alt="preview" width="300" height="300"  class="rounded-circle me-5">
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-6 ">
+			<h5 class="m-5">First Name:- <span class="fs-6">{{user?.first_name}}</span></h5>
+		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<h5 class="my-5">Last Name:- <span>{{user?.last_name}}</span></h5>
+		</div>
+	</div >
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<h5 class=" ms-5">Used for:- <span>{{user?.used_for}}</span></h5>
+		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<h5 class="">Email:- <a class="me-3">{{user?.email}}</a></h5>
+		</div>
+	</div>
+</div>
 </div>
