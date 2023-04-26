@@ -96,6 +96,7 @@ export class TaskDetailsComponent extends BaseComponent implements OnInit {
 	delete(update: any) {
 		this.service.deleteWorkspace(parseInt(update.id)).subscribe((res) => {
 			console.log(res);
+			this.getWorkspaces();
 			this.notify.Notify.success("Workspace deleted successfully");
 		},(error: HttpErrorResponse)=>{
           if(error.error instanceof  ErrorEvent){
