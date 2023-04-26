@@ -32,7 +32,7 @@ export class LogInComponent extends BaseComponent implements OnInit {
             window.location.reload();
             console.log(response);
           });
-          this.router.navigate(['/dashboard/user']);
+          // this.router.navigate(['/dashboard/user']);
 
         })
     }

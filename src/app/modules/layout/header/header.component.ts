@@ -49,11 +49,14 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 	}
 
 	logOut() {
-		Notiflix.Report.failure("Log Out!", "Are you sure you want to log out", "Log out", () => {
-			localStorage.removeItem("token");
-			window.location.reload();
-			this.router.navigate(["auth/login"]);
-		}, {backOverlayClickToClose: true});
+		localStorage.removeItem("token");
+		window.location.reload();
+		this.router.navigate(["/"]);
+		this.notify.Notify.success("Log Out successfully!");
+		// Notiflix.Report.failure("Log Out!", "Are you sure you want to log out", "Log out", () => {
+		// 	localStorage.removeItem("token");
+		//
+		// }, {backOverlayClickToClose: true});
 
 	}
 

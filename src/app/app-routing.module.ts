@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./shared/guards/auth.guard";
+import { GuestGuard } from "./shared/guards/guest.guard";
 
 const routes: Routes = [
 	{
 		path: "auth",
 		loadChildren: () => import("./modules/auth/auth.module").then(m => m.AuthModule),
 		title: "To Do List Authentication",
+		canActivate: [GuestGuard],
 	},
 	{
 		path: "dashboard",
@@ -21,11 +23,11 @@ const routes: Routes = [
 		title: "ToDoList | Workspace Management",
 	},
 	{
-		path: "",
+		path: " ",
 		redirectTo: "/auth/login",
 		pathMatch: "full",
 	},
-	{path: "**", redirectTo: "/errors/404"},
+	{path: "**", redirectTo: "/auth/login",},
 ];
 
 @NgModule({
