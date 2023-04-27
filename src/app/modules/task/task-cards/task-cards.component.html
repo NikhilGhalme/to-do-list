@@ -1,7 +1,12 @@
 <!--{{id}}-->
 <div class="row ">
 	<div class="col-12 d-flex justify-content-between m-2">
+		<ng-template [ngIf]="isMobileDevice" [ngIfElse]="isNotMobileDevice">
+		<button class="btn btn-outline-primary" (click)="isVisibleNewForm()"><i class="fa-regular fa-square-plus "></i></button>
+		</ng-template>
+		<ng-template #isNotMobileDevice>
 		<button class="btn btn-outline-primary" (click)="isVisibleNewForm()"><i class="fa-regular fa-square-plus me-2"></i>Create Task</button>
+		</ng-template>
 		<div class="d-flex me-3">
 			<input type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="searchTerm" placeholder="search cards" (keyup)="searchCard(searchTerm)">
 		</div>
