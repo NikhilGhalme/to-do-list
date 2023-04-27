@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from "@angular/core";
 import { UntypedFormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
 import * as Notiflix from "notiflix";
+import { BaseComponent } from "../../../shared/base-component.component";
 import { User } from "../../../shared/models/user";
 import { AuthService } from "../../../shared/services/auth/auth.service";
 
@@ -10,13 +10,13 @@ import { AuthService } from "../../../shared/services/auth/auth.service";
   templateUrl: "./sign-up.component.html",
   styleUrls: ["./sign-up.component.scss"]
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent extends  BaseComponent implements OnInit {
   user: any;
   userId: number;
   form: UntypedFormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {
-
+  constructor(injector:Injector,  private authService: AuthService) {
+    super(injector);
   }
 
   ngOnInit(): void {
